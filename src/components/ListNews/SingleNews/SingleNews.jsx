@@ -5,9 +5,11 @@ import Button from 'react-bootstrap/Button';
 
 const SingleNews = () => {
   const { listNews } = useSelector((state) => state.news);
-  console.log(listNews)
 
   const news = listNews.map((news) => {
+    const image =news.images.map(image => {
+      return <Card.Img variant="top" src={"http://localhost:5000/images/" + image} />
+    })
     return (
     //     <Card style={{ width: '18rem' }} key={news.id}>
     //   <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
@@ -27,8 +29,10 @@ const SingleNews = () => {
     //   </Button>
     // </Card>
 
- <Card key={news.id}>
-<Card.Img variant="top" src="holder.js/100px180" />
+ <Card key={news.id} style={{ margin: '4rem' }}>
+{
+  image ? image : null
+}
 <Card.Body>
   <Card.Title>{news.title}</Card.Title>
   <Card.Subtitle className="mb-2 text-muted">{news.description}</Card.Subtitle>
