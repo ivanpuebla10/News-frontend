@@ -12,9 +12,21 @@ const getAllArchive = async () => {
   return res.data;
 };
 
+const archiveNews = async (id) => {
+  const res = await axios.put(API_URL + "/news/archive/" + id);
+  return res.data;
+};
+
+const removeNews = async (id) => {
+  const res = await axios.delete(API_URL + "/news/" + id);
+  return res.data;
+};
+
 const newsService = {
   getAll,
-  getAllArchive
+  getAllArchive,
+  archiveNews,
+  removeNews
 };
 
 export default newsService;
