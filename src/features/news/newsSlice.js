@@ -37,6 +37,17 @@ export const removeNews = createAsyncThunk("listNews/removeNews", async (id) => 
   }
 });
 
+export const publish = createAsyncThunk(
+  "news/publish",
+  async (news) => {
+    try {
+      return await newsService.publish(news);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const newsSlice = createSlice({
   name: "listNews",
   initialState,
@@ -58,6 +69,9 @@ export const newsSlice = createSlice({
         (elem) => elem._id !== action.payload.news._id
       );
     })
+    builder.addCase(publish.fulfilled, (state, action) => {
+      state.listNews = [action.payload.news, ...state.listNews];
+    });
   },
 });
 

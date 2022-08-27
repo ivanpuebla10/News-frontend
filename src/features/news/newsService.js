@@ -22,11 +22,17 @@ const removeNews = async (id) => {
   return res.data;
 };
 
+const publish = async (news) => {
+  const res = await axios.post(API_URL + '/news', news)
+  return res.data 
+}
+
 const newsService = {
   getAll,
   getAllArchive,
   archiveNews,
-  removeNews
+  removeNews,
+  publish
 };
 
 export default newsService;
