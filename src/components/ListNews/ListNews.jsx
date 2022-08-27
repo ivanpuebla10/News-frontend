@@ -1,11 +1,20 @@
-import Card from "./Card/Card"
+import SingleNews from "./SingleNews/SingleNews"
 import PublishNews from "./PublishNews/PublishNews"
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAll } from "../../features/news/newsSlice";
 
 const ListNews = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(getAll());
+    }, []);
+  
     return (
-      <div>
+      <div className="container">
         <PublishNews/>
-        <Card/>
+        <SingleNews/>
       </div>
     )
   }
