@@ -6,8 +6,8 @@ import Button from 'react-bootstrap/Button';
 const SingleNews = () => {
   const { listNews } = useSelector((state) => state.news);
 
-  const news = listNews.map((news) => {
-    const image =news.images.map(image => {
+  const news = listNews?.map((news) => {
+    const image =news.images?.map(image => {
       return <Card.Img variant="top" src={"http://localhost:5000/images/" + image} />
     })
     return (

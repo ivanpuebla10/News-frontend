@@ -7,8 +7,14 @@ const getAll = async () => {
   return res.data;
 };
 
+const getAllArchive = async () => {
+  const res = await axios.get(API_URL + "/news/archived");
+  return res.data;
+};
+
 const newsService = {
-  getAll
+  getAll,
+  getAllArchive
 };
 
 export default newsService;
