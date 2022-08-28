@@ -31,7 +31,7 @@ const SingleNews = () => {
     //   </Button>
     // </Card>
 
- <Card key={news._id} style={{ margin: '4rem' }}>
+ <Card key={news._id} style={{ margin: '4rem'}}>
 {
   image ? image : null
 }

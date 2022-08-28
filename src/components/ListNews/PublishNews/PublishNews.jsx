@@ -1,14 +1,23 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useDispatch } from 'react-redux';
-import { publish } from '../../../features/news/newsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { publish, reset } from '../../../features/news/newsSlice';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer'
 
 //cambiar controlId
 
 const PublishNews = () => {
   const dispatch = useDispatch();
+  const { isSuccess, message, isError } = useSelector((state) => state.listNews);
+  const [show, setShow] = useState(false);
+  const [type, setType] = useState("");
+  const [desc, setDesc] = useState("");
+
   const [formData2, setFormData] = useState({
     title: '',
     description: '',
@@ -17,15 +26,29 @@ const PublishNews = () => {
     images:''
     });
 
+    useEffect(() => {
+      if (isError) {
+        setType("Error")
+        setDesc(message)
+        setShow(true)
+      }
+      if (isSuccess) {
+        setType("Success")
+        setDesc(message)
+        setShow(true)
+      }
+      dispatch(reset());
+    }, [isError, isSuccess, message, dispatch]);
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     if (e.target.images.files[0])
-      formData.set("images", e.target.images.files[0]);
-      formData.set("title", e.target.description.value);
+    formData.set("images", e.target.images.files[0]);
+    formData.set("title", e.target.title.value);
     formData.set("description", e.target.description.value);
     formData.set("content", e.target.content.value);
-    formData.set("author", e.target.description.value);
+    formData.set("author", e.target.author.value);
 
     await dispatch(publish(formData));
     await setFormData(()=>({
@@ -45,6 +68,24 @@ const PublishNews = () => {
   };
 
     return (
+      <>
+      <ToastContainer position='top-end'>
+      <Row>
+      <Col xs={6}>
+        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">{type}</strong>
+          </Toast.Header>
+          <Toast.Body>{desc}</Toast.Body>
+        </Toast>
+      </Col>
+    </Row>
+    </ToastContainer>
       <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em" }}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
@@ -78,6 +119,7 @@ const PublishNews = () => {
         Publish
       </Button>
     </Form>
+    </>
     )
   }
   

@@ -3,6 +3,9 @@ import newsService from "./newsService";
 
 const initialState = {
   listNews: [],
+  isError: false,
+  isSuccess: false,
+  message: "",
 };
 
 export const getAll = createAsyncThunk("listNews/getAllNews", async () => {
@@ -39,11 +42,12 @@ export const removeNews = createAsyncThunk("listNews/removeNews", async (id) => 
 
 export const publish = createAsyncThunk(
   "news/publish",
-  async (news) => {
+  async (news, thunkAPI) => {
     try {
       return await newsService.publish(news);
     } catch (error) {
-      console.error(error);
+      const message = error.response.data.message;
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -51,13 +55,23 @@ export const publish = createAsyncThunk(
 export const newsSlice = createSlice({
   name: "listNews",
   initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAll.fulfilled, (state, action) => {
       state.listNews = action.payload;
     });
     builder.addCase(getAllArchive.fulfilled, (state, action) => {
       state.listNews = action.payload;
+    });
+    builder.addCase(getAllArchive.pending, (state) => {
+      state.isLoading = true;
     });
     builder.addCase(archiveNews.fulfilled, (state, action) => {
       state.listNews = state.listNews.filter(
@@ -70,9 +84,19 @@ export const newsSlice = createSlice({
       );
     })
     builder.addCase(publish.fulfilled, (state, action) => {
+      state.isSuccess = true;
+      state.message = action.payload.message;
       state.listNews = [action.payload.news, ...state.listNews];
     });
+    builder.addCase(getAll.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(publish.rejected, (state, action) => {
+      state.isError = true;
+      state.message = action.payload;
+    })
   },
 });
 
+export const { reset } = newsSlice.actions;
 export default newsSlice.reducer;
