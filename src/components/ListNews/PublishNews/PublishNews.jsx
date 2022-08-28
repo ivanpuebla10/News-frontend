@@ -78,6 +78,7 @@ const PublishNews = () => {
         onClick={() => setOpen(!open)}
         aria-controls="example-collapse-text"
         aria-expanded={open}
+        style={{ margin: '2rem'}}
       >
         Click to publish
       </Button>
@@ -94,8 +95,8 @@ const PublishNews = () => {
     </Row>
     </ToastContainer>
     <Collapse in={open}>
-
-      <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em" }}>
+      
+      <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em", background: '#F2F4F6' }}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control type="text" placeholder="Title" onChange={onChange} name="title" value={formData2.title}/>
