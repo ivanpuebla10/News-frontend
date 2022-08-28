@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer'
+import Collapse from 'react-bootstrap/Collapse';
+
 
 //cambiar controlId
 
@@ -17,6 +19,7 @@ const PublishNews = () => {
   const [show, setShow] = useState(false);
   const [type, setType] = useState("");
   const [desc, setDesc] = useState("");
+  const [open, setOpen] = useState(false);
 
   const [formData2, setFormData] = useState({
     title: '',
@@ -43,6 +46,7 @@ const PublishNews = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+
     if (e.target.images.files[0])
     formData.set("images", e.target.images.files[0]);
     formData.set("title", e.target.title.value);
@@ -59,6 +63,7 @@ const PublishNews = () => {
     images: ''
     }))
   };
+
   const onChange = async (e) => {
     e.preventDefault();
     setFormData((prevState)=>({
@@ -68,17 +73,19 @@ const PublishNews = () => {
   };
 
     return (
-      <>
+      <>      
+      <Button
+        onClick={() => setOpen(!open)}
+        aria-controls="example-collapse-text"
+        aria-expanded={open}
+      >
+        Click to publish
+      </Button>
       <ToastContainer position='top-end'>
       <Row>
       <Col xs={6}>
         <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
           <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
             <strong className="me-auto">{type}</strong>
           </Toast.Header>
           <Toast.Body>{desc}</Toast.Body>
@@ -86,6 +93,8 @@ const PublishNews = () => {
       </Col>
     </Row>
     </ToastContainer>
+    <Collapse in={open}>
+
       <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em" }}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
@@ -119,6 +128,7 @@ const PublishNews = () => {
         Publish
       </Button>
     </Form>
+    </Collapse>
     </>
     )
   }
