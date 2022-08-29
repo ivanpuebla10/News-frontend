@@ -6,6 +6,7 @@ import ListNews from './components/ListNews/ListNews';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Archive from './components/Archive/Archive';
 import NewsDetail from './components/ListNews/NewsDetail/NewsDetail';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<ListNews/>} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/details/:id" element={<NewsDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer/>
       </BrowserRouter>
