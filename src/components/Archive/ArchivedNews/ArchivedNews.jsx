@@ -12,7 +12,9 @@ const ArchivedNews = () => {
     const news = listNews?.map((news) => {
       const image =news.images?.map((image, i) => {
         if(i === 0)
-        return <Card.Img variant="top" src={"http://localhost:5000/images/" + image} />
+        return <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
+        <Card.Img variant="top" src={"http://localhost:5000/images/" + image} key={i} />
+        </Link>
       })
       return (  
    <Card key={news._id} style={{ margin: '4rem' }}>
@@ -21,17 +23,16 @@ const ArchivedNews = () => {
   }
   <Card.Body>
   <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
-
     <Card.Title>{news.title}</Card.Title>
-    <Card.Subtitle className="mb-2 text-muted">{news.description}</Card.Subtitle>
-    <Card.Text>
-      {news.content}
-    </Card.Text>
-    <ListGroup className="list-group-flush">
-          <ListGroup.Item>Author: {news.author}</ListGroup.Item>
-          <ListGroup.Item>{news.date}</ListGroup.Item>
-    </ListGroup>
     </Link>
+      <Card.Text className="mb-2 text-muted">
+        {news.description} 
+        <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}><Card.Subtitle>Read More{'>>'}</Card.Subtitle></Link>
+      </Card.Text>
+      {/* <Card.Text>
+        {news.content}
+      </Card.Text> */}
+              <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{news.date}</span></Card.Footer>
     <Button variant="primary" onClick={()=>dispatch(removeNews(news._id))}>
     Remove
     </Button>
