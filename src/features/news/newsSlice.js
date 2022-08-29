@@ -6,6 +6,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   message: "",
+  news:{}
 };
 
 export const getAll = createAsyncThunk("listNews/getAllNews", async () => {
@@ -52,6 +53,14 @@ export const publish = createAsyncThunk(
   }
 );
 
+export const getById = createAsyncThunk("news/getById", async (id) => {
+  try {
+    return await newsService.getById(id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 export const newsSlice = createSlice({
   name: "listNews",
   initialState,
@@ -94,7 +103,11 @@ export const newsSlice = createSlice({
     builder.addCase(publish.rejected, (state, action) => {
       state.isError = true;
       state.message = action.payload;
-    })
+    });
+    builder.addCase(getById.fulfilled, (state, action) => {
+      state.news = action.payload;
+    });
+
   },
 });
 

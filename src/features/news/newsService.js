@@ -27,12 +27,19 @@ const publish = async (news) => {
   return res.data 
 }
 
+const getById = async (id) => {
+  const res = await axios.get(API_URL + "/news/detail/" + id);
+  return res.data;
+};
+
+
 const newsService = {
   getAll,
   getAllArchive,
   archiveNews,
   removeNews,
-  publish
+  publish,
+  getById
 };
 
 export default newsService;
