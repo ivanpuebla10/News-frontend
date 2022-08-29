@@ -94,8 +94,8 @@ export const newsSlice = createSlice({
     })
     builder.addCase(publish.fulfilled, (state, action) => {
       state.isSuccess = true;
-      state.message = action.payload.message;
       state.listNews = [action.payload.news, ...state.listNews];
+      state.message = action.payload.message;
     });
     builder.addCase(getAll.pending, (state) => {
       state.isLoading = true;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ import Collapse from 'react-bootstrap/Collapse';
 
 const PublishNews = () => {
   const dispatch = useDispatch();
+  const ref = useRef();
   const { isSuccess, message, isError } = useSelector((state) => state.listNews);
   const [show, setShow] = useState(false);
   const [type, setType] = useState("");
@@ -26,7 +27,6 @@ const PublishNews = () => {
     description: '',
     content: '',
     author: '',
-    images:''
     });
 
     useEffect(() => {
@@ -39,30 +39,49 @@ const PublishNews = () => {
         setType("Success")
         setDesc(message)
         setShow(true)
+        setFormData(()=>({
+          title: '',
+          description: '',
+          content: '',
+          author: '',
+          }))
+          ref.current.value = "";
+          setOpen(!open)
       }
       dispatch(reset());
     }, [isError, isSuccess, message, dispatch]);
 
   const onSubmit = async (e) => {
+
     e.preventDefault();
     const formData = new FormData();
+    // let upload =[]
+    // for (let img of e.target.images.files) {
+    //   upload.push(img)
+    // }
 
-    if (e.target.images.files[0])
-    formData.set("images", e.target.images.files[0]);
+    // // let upload1 = upload.join(",")
+    // console.log(upload)
+    
+
+for (let img of e.target.images.files) {
+  formData.append('images', img)
+}
+    // formData.set("images", file);
     formData.set("title", e.target.title.value);
     formData.set("description", e.target.description.value);
     formData.set("content", e.target.content.value);
     formData.set("author", e.target.author.value);
 
     await dispatch(publish(formData));
-    await setFormData(()=>({
-    title: '',
-    description: '',
-    content: '',
-    author: '',
-    images: ''
-    }))
-    setOpen(!open)
+    //si deja de funcionar descomentar esto y quitar este codigo del useffect
+    // await setFormData(()=>({
+    // title: '',
+    // description: '',
+    // content: '',
+    // author: '',
+    // }))
+    // setOpen(!open)}
   };
 
   const onChange = async (e) => {
@@ -83,7 +102,7 @@ const PublishNews = () => {
       >
         Click to publish
       </Button>
-      <ToastContainer position='top-end'>
+      <ToastContainer position='bottom-start'>
       <Row>
       <Col xs={6}>
         <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
@@ -95,6 +114,7 @@ const PublishNews = () => {
       </Col>
     </Row>
     </ToastContainer>
+
     <Collapse in={open}>
 
       <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em", background: '#F2F4F6' }}>
@@ -123,7 +143,7 @@ const PublishNews = () => {
 
       <Form.Group controlId="formFileDisabled" className="mb-3">
         <Form.Label>Image(s)</Form.Label>
-        <Form.Control type="file" name="images"/>
+        <Form.Control type="file" name="images" ref= {ref} multiple="multiple"/>
       </Form.Group>
 
       <Button variant="primary" type="submit">
