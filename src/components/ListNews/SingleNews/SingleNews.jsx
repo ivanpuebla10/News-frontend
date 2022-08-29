@@ -18,7 +18,7 @@ const SingleNews = () => {
     })
     if(i <= 2) {
       return (
-              <Carousel.Item key={news._id}>
+              <Carousel.Item key={news?._id}>
                 {
    image ? image : null
  }
@@ -27,13 +27,18 @@ const SingleNews = () => {
           src="holder.js/800x400?text=First slide&bg=373940"
           alt="First slide"
         /> */}
-        <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
         <Carousel.Caption>
-          <h3>{news.title}</h3>
-          <p>{news.description}</p>
-          
+        <Link to={"/details/" + news?._id} style={{ all:'unset', cursor: 'pointer'}}>
+
+          <h3>{news?.title}</h3>
+          <p>{news?.description}</p>
+          </Link>
+          <Button variant="primary" onClick={()=>dispatch(archiveNews(news._id))}>
+       Archive
+       </Button>
         </Carousel.Caption>
-        </Link>
+
+
       </Carousel.Item>)}})
       //   <Card className="bg-dark text-white" style={{ margin: '1rem', border: "0.3rem solid #434B54"}} key={news._id}>
       //   {image ? image : null}
@@ -112,11 +117,17 @@ const SingleNews = () => {
     {/* <CardGroup style={{background: '#161D25', width: '100%'}} >    
       {group}
    </CardGroup> */}
-       <Carousel>{group}</Carousel>
+   {listNews.length !== 0 ? 
+   <>
+    <Carousel>{group}</Carousel>
    <div style={{ margin: '2em'}}>
     <h1>Last News</h1>
     {news}
     </div>
+    </>
+    :
+    <h1>Still empty</h1>
+    }
     </>;
 };
 

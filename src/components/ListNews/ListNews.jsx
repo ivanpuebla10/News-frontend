@@ -25,7 +25,7 @@ const ListNews = () => {
       }
     
     return (
-      <div style={{background: '#434B54'}}>
+      <div style={{background: '#434B54'}} className="container">
         <PublishNews/>
         <div style={{background: '#F2F4F6'}}>
         <SingleNews/>
