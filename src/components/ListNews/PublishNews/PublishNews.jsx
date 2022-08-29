@@ -62,6 +62,7 @@ const PublishNews = () => {
     author: '',
     images: ''
     }))
+    setOpen(!open)
   };
 
   const onChange = async (e) => {
@@ -95,7 +96,7 @@ const PublishNews = () => {
     </Row>
     </ToastContainer>
     <Collapse in={open}>
-      
+
       <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em", background: '#F2F4F6' }}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
