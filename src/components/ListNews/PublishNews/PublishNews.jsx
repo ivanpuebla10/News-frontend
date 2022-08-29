@@ -121,9 +121,6 @@ for (let img of e.target.images.files) {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control type="text" placeholder="Title" onChange={onChange} name="title" value={formData2.title}/>
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">

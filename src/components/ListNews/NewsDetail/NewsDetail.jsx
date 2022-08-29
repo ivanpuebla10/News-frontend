@@ -28,7 +28,7 @@ const NewsDetail = () => {
             {news.content}
           </Card.Text>
         </Card.Body>
-        <Card.Footer>Author: {news.author}</Card.Footer>
+        <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{news.date}</span></Card.Footer>
       </Card>
     //     <div>
     //     <p>{news.title}</p>

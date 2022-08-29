@@ -3,9 +3,9 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import { archiveNews } from "../../../features/news/newsSlice";
-import CardGroup from 'react-bootstrap/CardGroup';
 import { Link } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
+import Placeholder from 'react-bootstrap/Placeholder'
 
 const SingleNews = () => {
   const { listNews } = useSelector((state) => state.listNews);
@@ -83,7 +83,9 @@ const SingleNews = () => {
   const news = listNews?.map((news, i) => {
     const image =news.images?.map((image,i )=> {
       if(i === 0)
-      return <Card.Img variant="top" src={"http://localhost:5000/images/" + image} key={i} />
+      return <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
+      <Card.Img variant="top" src={"http://localhost:5000/images/" + image} key={i} />
+      </Link>
     })
     if(i > 2) {
       return (
@@ -96,15 +98,15 @@ const SingleNews = () => {
     <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
 
       <Card.Title>{news.title}</Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">{news.description}</Card.Subtitle>
-      <Card.Text>
-        {news.content}
-      </Card.Text>
-      <ListGroup className="list-group-flush">
-            <ListGroup.Item>Author: {news.author}</ListGroup.Item>
-            <ListGroup.Item>{news.date}</ListGroup.Item>
-      </ListGroup>
       </Link>
+      <Card.Text className="mb-2 text-muted">
+        {news.description} 
+        <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}><Card.Subtitle>Read More{'>>'}</Card.Subtitle></Link>
+      </Card.Text>
+      {/* <Card.Text>
+        {news.content}
+      </Card.Text> */}
+              <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{news.date}</span></Card.Footer>
       <Button variant="primary" onClick={()=>dispatch(archiveNews(news._id))}>
       Archive
       </Button>
@@ -126,7 +128,15 @@ const SingleNews = () => {
     </div>
     </>
     :
-    <h1>Still empty</h1>
+    <>
+          <Placeholder as="p" animation="glow" size={'lg'} style={{height:'70vh'}}>
+        <Placeholder xs={12} size={'lg'}/>
+      </Placeholder>
+      <Placeholder as="p" animation="wave" size={'lg'}>
+        <Placeholder xs={12} size={'lg'}/>
+      </Placeholder>
+      <Placeholder.Button xs={4} aria-hidden="true" />
+    </>
     }
     </>;
 };
