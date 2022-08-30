@@ -4,6 +4,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import { removeNews } from "../../../features/news/newsSlice";
 import { Link } from "react-router-dom";
+import Figure from 'react-bootstrap/Figure';
+
 
 const ArchivedNews = () => {
     const { listNews } = useSelector((state) => state.listNews);
@@ -46,7 +48,16 @@ const ArchivedNews = () => {
         {listNews.length !== 0 ?
         <>{news}</>
         :
-        <h1>There are not archived news</h1>
+        <Card style={{height:'100vh'}}>
+        <Card.Header as="h5">Still empty</Card.Header>
+        <Card.Body>
+          <Card.Title>There are no archived news</Card.Title>
+          <Card.Text>
+            Go to news page and click on "archive".
+          </Card.Text>
+          <Button variant="primary"><Link to={"/"} style={{ all:'unset', cursor: 'pointer'}}>Go home</Link></Button>
+        </Card.Body>
+      </Card>
     }
         </div>;
   };

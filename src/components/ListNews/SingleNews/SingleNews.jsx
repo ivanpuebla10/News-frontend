@@ -143,13 +143,15 @@ const SingleNews = () => {
     </>
     :
     <>
-          <Placeholder as="p" animation="glow" size={'lg'} style={{height:'70vh'}}>
-        <Placeholder xs={12} size={'lg'}/>
-      </Placeholder>
-      <Placeholder as="p" animation="wave" size={'lg'}>
-        <Placeholder xs={12} size={'lg'}/>
-      </Placeholder>
-      <Placeholder.Button xs={4} aria-hidden="true" />
+        <Card style={{height:'100vh'}}>
+        <Card.Header as="h5">Still empty</Card.Header>
+        <Card.Body>
+          <Card.Title>There are no news</Card.Title>
+          <Card.Text>
+            Click on publish and write some articles!
+          </Card.Text>
+        </Card.Body>
+      </Card>
     </>
     }
     </>;

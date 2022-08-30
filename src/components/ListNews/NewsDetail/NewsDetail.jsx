@@ -11,33 +11,31 @@ const NewsDetail = () => {
     const dispatch = useDispatch();
     const { news } = useSelector((state) => state.listNews);
     
-    console.log(news)
     useEffect(() => {
         dispatch(getById(id));
     }, []);
 
-    const image =news.images?.map((image,i )=> {
+    const image =news?.images?.map((image,i )=> {
         return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>
     })
     
-    let newDate = news.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
-    console.log(newDate)
-
+    let newDate = news?.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
+    
     return (
         <Card className="container">
         <Card.Body>
             <div style={{textAlign:'left', marginBottom:'2rem'}}>
-        <h2 style={{marginBottom:'1rem'}}>{news.title}</h2>
-    <Card.Subtitle className="mb-2 text-muted">{news.description}</Card.Subtitle>        
+        <h2 style={{marginBottom:'1rem'}}>{news?.title}</h2>
+    <Card.Subtitle className="mb-2 text-muted">{news?.description}</Card.Subtitle>        
         </div>
         <Carousel >
         {image ? image : null}
         </Carousel>
           <Card.Text style={{textAlign:'justify', padding:'3rem'}}>
-            {news.content}
+            {news?.content}
           </Card.Text>
         </Card.Body>
-        <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{newDate[0]}</span></Card.Footer>
+        <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news?.author}</span><span>{newDate? newDate[0] : null}</span></Card.Footer>
       </Card>
     //     <div>
     //     <p>{news.title}</p>
