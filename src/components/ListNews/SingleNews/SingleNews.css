@@ -35,3 +35,14 @@
     width:70%; 
 }
 
+@media only screen and (max-width: 769px) {
+    .link-class {
+        display: none
+    }
+    .body-container {
+        width:100%; 
+    }
+    .card-class {
+        width: 100%;
+    }
+  }

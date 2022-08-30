@@ -90,7 +90,7 @@ const SingleNews = () => {
       </Link>
     })
     if(i > 2) {
-      let newDate = news.date.replace(/[a-zA-Z]/gi, " ")
+      let newDate = news.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
       return (
     <Card key={news._id} className="card-class">
 <div  className="card-flex">
@@ -110,7 +110,7 @@ const SingleNews = () => {
       </Card.Text> */}
               <Card.Footer className="footer">
                 <span>Author: {news.author}</span>
-                <span>{newDate}</span>
+                <span>{newDate[0]}</span>
                 </Card.Footer>
                 <Button variant="primary" onClick={()=>dispatch(archiveNews(news._id))}>
       Archive

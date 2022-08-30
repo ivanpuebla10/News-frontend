@@ -10,6 +10,8 @@ const ArchivedNews = () => {
     const dispatch = useDispatch();
 
     const news = listNews?.map((news) => {
+        let newDate = news.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
+
       const image =news.images?.map((image, i) => {
         if(i === 0)
         return <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
@@ -32,7 +34,7 @@ const ArchivedNews = () => {
       {/* <Card.Text>
         {news.content}
       </Card.Text> */}
-              <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{news.date}</span></Card.Footer>
+              <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{newDate[0]}</span></Card.Footer>
     <Button variant="primary" onClick={()=>dispatch(removeNews(news._id))}>
     Remove
     </Button>
