@@ -4,7 +4,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import { removeNews } from "../../../features/news/newsSlice";
 import { Link } from "react-router-dom";
-import Figure from 'react-bootstrap/Figure';
 
 
 const ArchivedNews = () => {
@@ -13,18 +12,30 @@ const ArchivedNews = () => {
 
     const news = listNews?.map((news) => {
         let newDate = news.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
+        const fetched = news?.fetched
 
-      const image =news.images?.map((image, i) => {
-        if(i === 0)
-        return <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
-        <Card.Img variant="top" src={"http://localhost:5000/images/" + image} key={i} />
-        </Link>
-      })
+    //   const image =news.images?.map((image, i) => {
+    //     if(i === 0)
+    //     return <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
+    //     <Card.Img variant="top" src={"http://localhost:5000/images/" + image} key={i} />
+    //     </Link>
+    //   })
+
       return (  
    <Card key={news._id} style={{ margin: '4rem' }}>
-  {
-    image ? image : null
-  }
+    <>
+    {
+    fetched ? 
+    
+    <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
+    <Card.Img variant="top" src={news?.images[0]}  />
+    </Link>
+    :
+    <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
+    <Card.Img variant="top" src={"http://localhost:5000/images/" + news?.images[0]} />
+    </Link>
+    }
+    </>
   <Card.Body>
   <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
     <Card.Title>{news.title}</Card.Title>

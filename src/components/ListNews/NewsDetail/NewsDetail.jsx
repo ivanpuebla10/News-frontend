@@ -15,11 +15,20 @@ const NewsDetail = () => {
         dispatch(getById(id));
     }, []);
 
+    // const image =news?.images?.map((image,i )=> {
+    //     return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>
+    // })
+    const fetched = news?.fetched
     const image =news?.images?.map((image,i )=> {
-        return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>
-    })
-    
-    let newDate = news?.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
+         
+    if(fetched) { 
+    return <Carousel.Item key={i}><Card.Img src={image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>}
+    else{
+      return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>
+    }    
+      })
+
+      let newDate = news?.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
     
     return (
         <Card className="container">

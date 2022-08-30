@@ -14,16 +14,42 @@ const SingleNews = () => {
   const dispatch = useDispatch();
 
   const group = listNews?.map((news, i) => {
+    const fetched = news.fetched
     const image =news.images?.map((image,i )=> {
       if(i === 0)
-      return <Card.Img className = "car-image" src={"http://localhost:5000/images/" + image} key={i} />
+      return (
+      <>
+      {fetched ? 
+      <>
+      {/* // <Link to={"/details/" + news._id} className="link-class"> */}
+      <img className ="card-image" src={image} key={i} />
+      {/* // </Link> */}
+      </>
+    :
+    <>
+    {/* // <Link to={"/details/" + news._id} className="link-class"> */}
+    <img className ="card-image" src={"http://localhost:5000/images/" + image} key={i} />
+    {/* // </Link> */}
+    </>
+    
+    }
+    </>
+      )
     })
+
     if(i <= 2) {
       return (
               <Carousel.Item key={news?._id}>
-                {
-   image ? image : null
- }
+                <>
+    {
+    fetched ? 
+    
+    <img className ="card-image" src={news?.images[0]} key={i} />
+
+    :
+<img className ="card-image" src={"http://localhost:5000/images/" + news?.images[0]} key={i} />
+    }
+    </>
         {/* <img
           className="d-block w-100"
           src="holder.js/800x400?text=First slide&bg=373940"
@@ -83,14 +109,31 @@ const SingleNews = () => {
 
 
   const news = listNews?.map((news, i) => {
+    const fetched = news.fetched
     const image =news.images?.map((image,i )=> {
       if(i === 0)
       return (
-      // <Link to={"/details/" + news._id} className="link-class">
-      <img className ="card-image" src={"http://localhost:5000/images/" + image} key={i} />
-      // </Link>
+      <>
+      {fetched ? 
+      <>
+      {/* // <Link to={"/details/" + news._id} className="link-class"> */}
+      <img className ="card-image" src={image} key={i} />
+      {/* // </Link> */}
+      </>
+      
+    :
+    <>
+    {/* // <Link to={"/details/" + news._id} className="link-class"> */}
+    <img className ="card-image" src={"http://localhost:5000/images/" + image} key={i} />
+    {/* // </Link> */}
+    </>
+    
+    }
+    </>
       )
     })
+
+
     if(i > 2) {
       let newDate = news.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
       return (
