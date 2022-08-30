@@ -30,7 +30,7 @@ const SingleNews = () => {
           alt="First slide"
         /> */}
         <Carousel.Caption>
-        <Link to={"/details/" + news?._id} style={{ all:'unset', cursor: 'pointer'}}>
+        <Link className = "link-class" to={"/details/" + news?._id} >
 
           <h3>{news?.title}</h3>
           <p>{news?.description}</p>
@@ -85,29 +85,30 @@ const SingleNews = () => {
   const news = listNews?.map((news, i) => {
     const image =news.images?.map((image,i )=> {
       if(i === 0)
-      return <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
-      <img src={"http://localhost:5000/images/" + image} key={i} style={{ width:'100%', height:'100%'}}/>
+      return <Link to={"/details/" + news._id} className="link-class">
+      <img className ="card-image" src={"http://localhost:5000/images/" + image} key={i} />
       </Link>
     })
     if(i > 2) {
       let newDate = news.date.replace(/[a-zA-Z]/gi, " ")
       return (
-    <Card key={news._id} style={{ width:'80%'}}>
-<div style={{ width:'100%', display: 'flex', justifyContent:"space-between", padding:'1rem', flexWrap:'wrap'}}>
-<div style={{ width:'70%', heigth:'100%'}}>
+    <Card key={news._id} className="card-class">
+<div  className="card-flex">
+<div className="body-container">
     <Card.Body>
-    <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
-
-      <Card.Title>{news.title}</Card.Title>
+    <Link to={"/details/" + news._id} className="link-class">
+      <Card.Title >{news.title}</Card.Title>
       </Link>
       <Card.Text className="mb-2 text-muted">
         {news.description} 
-        <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}><Card.Subtitle>Read More{'>>'}</Card.Subtitle></Link>
+        <Link to={"/details/" + news._id} className="link-class">
+          <Card.Subtitle>Read More{'>>'}</Card.Subtitle>
+        </Link>
       </Card.Text>
       {/* <Card.Text>
         {news.content}
       </Card.Text> */}
-              <Card.Footer style={{display:"flex", justifyContent:"space-around"}}>
+              <Card.Footer className="footer">
                 <span>Author: {news.author}</span>
                 <span>{newDate}</span>
                 </Card.Footer>
@@ -116,12 +117,13 @@ const SingleNews = () => {
       </Button>
     </Card.Body>
     </div>
-    <div style={{ width:'30%', heigth:'100%'}}>
+    {/* volver a poner este div y quitar el width del link class */}
+    {/* <div style={{ width:'30%', heigth:'100%'}}> */}
 
 {
   image ? image : null
 } 
-</div>
+{/* </div> */}
 </div>
     </Card> 
     );}

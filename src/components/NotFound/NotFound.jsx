@@ -24,8 +24,8 @@ const NotFound = () => {
 <section className="error">
   <div className="error__content">
     <div className="error__message message">
-      <h1 className="message__title">Página no encontrada</h1>
-      <p className="message__text">Lo sentimos, la página que buscaba no se encuentra aquí. El enlace que ha seguido puede estar roto o ya no existe.</p>
+      <h1 className="message__title">Page Not Found</h1>
+      <p className="message__text">Sorry, the page you were looking for cannot be found here. The link you followed may be broken or no longer exists.</p>
     </div>
   </div>
 
