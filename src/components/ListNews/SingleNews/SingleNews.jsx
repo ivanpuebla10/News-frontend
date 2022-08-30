@@ -6,6 +6,8 @@ import { archiveNews } from "../../../features/news/newsSlice";
 import { Link } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
 import Placeholder from 'react-bootstrap/Placeholder'
+import "./SingleNews.css";
+
 
 const SingleNews = () => {
   const { listNews } = useSelector((state) => state.listNews);
@@ -14,7 +16,7 @@ const SingleNews = () => {
   const group = listNews?.map((news, i) => {
     const image =news.images?.map((image,i )=> {
       if(i === 0)
-      return <Card.Img variant="top" src={"http://localhost:5000/images/" + image} key={i} style={{ opacity: '0.8'}}/>
+      return <Card.Img className = "car-image" src={"http://localhost:5000/images/" + image} key={i} />
     })
     if(i <= 2) {
       return (
@@ -84,16 +86,15 @@ const SingleNews = () => {
     const image =news.images?.map((image,i )=> {
       if(i === 0)
       return <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
-      <Card.Img variant="top" src={"http://localhost:5000/images/" + image} key={i} />
+      <img src={"http://localhost:5000/images/" + image} key={i} style={{ width:'100%', height:'100%'}}/>
       </Link>
     })
     if(i > 2) {
+      let newDate = news.date.replace(/[a-zA-Z]/gi, " ")
       return (
-    <Card key={news._id} style={{ width:'60rem'}}>
-
-{
-  image ? image : null
-}
+    <Card key={news._id} style={{ width:'80%'}}>
+<div style={{ width:'100%', display: 'flex', justifyContent:"space-between", padding:'1rem', flexWrap:'wrap'}}>
+<div style={{ width:'70%', heigth:'100%'}}>
     <Card.Body>
     <Link to={"/details/" + news._id} style={{ all:'unset', cursor: 'pointer'}}>
 
@@ -106,12 +107,22 @@ const SingleNews = () => {
       {/* <Card.Text>
         {news.content}
       </Card.Text> */}
-              <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{news.date}</span></Card.Footer>
-      <Button variant="primary" onClick={()=>dispatch(archiveNews(news._id))}>
+              <Card.Footer style={{display:"flex", justifyContent:"space-around"}}>
+                <span>Author: {news.author}</span>
+                <span>{newDate}</span>
+                </Card.Footer>
+                <Button variant="primary" onClick={()=>dispatch(archiveNews(news._id))}>
       Archive
       </Button>
     </Card.Body>
+    </div>
+    <div style={{ width:'30%', heigth:'100%'}}>
 
+{
+  image ? image : null
+} 
+</div>
+</div>
     </Card> 
     );}
   });
@@ -121,9 +132,9 @@ const SingleNews = () => {
    </CardGroup> */}
    {listNews.length !== 0 ? 
    <>
-    <Carousel>{group}</Carousel>
-   <div style={{ margin: '2em'}}>
-    <h1>Last News</h1>
+    <Carousel >{group}</Carousel>
+   <div className="container">
+   <h1>Last News</h1>
     {news}
     </div>
     </>
