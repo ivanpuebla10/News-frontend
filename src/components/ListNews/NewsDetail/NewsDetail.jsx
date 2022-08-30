@@ -10,7 +10,8 @@ const NewsDetail = () => {
     const { id } = useParams()
     const dispatch = useDispatch();
     const { news } = useSelector((state) => state.listNews);
-
+    
+    console.log(news)
     useEffect(() => {
         dispatch(getById(id));
     }, []);

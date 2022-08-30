@@ -6,7 +6,7 @@
 .link-class {
     all:unset; 
     cursor: pointer;
-    width: 30%
+    /* width: 30% */
 }
 
 .footer {
@@ -35,9 +35,16 @@
     width:70%; 
 }
 
+.image-container {
+     width:30%;
+}
+
 @media only screen and (max-width: 769px) {
-    .link-class {
-        display: none
+    .image-container {
+        /* width:10rem;
+    height:10rem;
+    float: right */
+    display: none;
     }
     .body-container {
         width:100%; 

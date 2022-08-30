@@ -85,9 +85,11 @@ const SingleNews = () => {
   const news = listNews?.map((news, i) => {
     const image =news.images?.map((image,i )=> {
       if(i === 0)
-      return <Link to={"/details/" + news._id} className="link-class">
+      return (
+      // <Link to={"/details/" + news._id} className="link-class">
       <img className ="card-image" src={"http://localhost:5000/images/" + image} key={i} />
-      </Link>
+      // </Link>
+      )
     })
     if(i > 2) {
       let newDate = news.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
@@ -118,12 +120,11 @@ const SingleNews = () => {
     </Card.Body>
     </div>
     {/* volver a poner este div y quitar el width del link class */}
-    {/* <div style={{ width:'30%', heigth:'100%'}}> */}
-
+    <div className="image-container">
 {
   image ? image : null
 } 
-{/* </div> */}
+</div>
 </div>
     </Card> 
     );}
