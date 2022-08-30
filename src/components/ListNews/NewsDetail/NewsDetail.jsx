@@ -16,10 +16,11 @@ const NewsDetail = () => {
     }, []);
 
     const image =news.images?.map((image,i )=> {
-        return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'60rem'}}/></Carousel.Item>
+        return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>
     })
     
-    let newDate = news.date?.replace(/[a-zA-Z]/gi, " ")
+    let newDate = news.date?.replace(/[a-zA-Z]/gi, " ").substring(".").split(".");
+    console.log(newDate)
 
     return (
         <Card className="container">
@@ -35,7 +36,7 @@ const NewsDetail = () => {
             {news.content}
           </Card.Text>
         </Card.Body>
-        <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{newDate}</span></Card.Footer>
+        <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news.author}</span><span>{newDate[0]}</span></Card.Footer>
       </Card>
     //     <div>
     //     <p>{news.title}</p>
