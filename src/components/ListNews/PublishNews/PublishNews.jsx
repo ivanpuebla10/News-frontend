@@ -9,6 +9,14 @@ import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Collapse from 'react-bootstrap/Collapse';
+import Alert from 'react-bootstrap/Alert';
+import Overlay from 'react-bootstrap/Overlay';
+import Popover from 'react-bootstrap/Popover';
+import CloseButton from 'react-bootstrap/CloseButton';
+
+
+
+
 
 
 //cambiar controlId
@@ -16,6 +24,8 @@ import Collapse from 'react-bootstrap/Collapse';
 const PublishNews = () => {
   const dispatch = useDispatch();
   const ref = useRef();
+  const target = useRef(null);
+
   const { isSuccess, message, isError } = useSelector((state) => state.listNews);
   const [show, setShow] = useState(false);
   const [type, setType] = useState("");
@@ -99,10 +109,11 @@ for (let img of e.target.images.files) {
         aria-controls="example-collapse-text"
         aria-expanded={open}
         style={{ margin: '2rem'}}
+  
       >
         Click to publish
       </Button>
-      <ToastContainer position='bottom-start'>
+      {/* <ToastContainer position='top-end'>
       <Row>
       <Col xs={6}>
         <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
@@ -113,8 +124,26 @@ for (let img of e.target.images.files) {
         </Toast>
       </Col>
     </Row>
-    </ToastContainer>
+    </ToastContainer> */}
 
+      {/* <Alert variant="danger" onClose={() => setShow(false)} show={show} dismissible>
+        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+        <p>
+          Change this and that and try again. Duis mollis, est non commodo
+          luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+          Cras mattis consectetur purus sit amet fermentum.
+        </p>
+      </Alert> */}
+
+<Overlay target={target.current} show={show} placement="right" delay={3000} autohide>
+<Popover id="popover-contained">
+
+          <Popover.Header as="h3"><CloseButton onClick={() => setShow(!show)}/> {type}</Popover.Header>
+          <Popover.Body>
+            <strong>{desc}</strong> 
+          </Popover.Body>
+        </Popover>
+      </Overlay>
     <Collapse in={open}>
 
       <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em", background: '#F2F4F6' }}>
@@ -143,7 +172,7 @@ for (let img of e.target.images.files) {
         <Form.Control type="file" name="images" ref= {ref} multiple="multiple"/>
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit"       ref={target}>
         Publish
       </Button>
     </Form>
