@@ -1,12 +1,12 @@
-import React from 'react';
-import './App.css';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import ListNews from './components/ListNews/ListNews';
+import React from "react";
+import "./App.css";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import ListNews from "./components/ListNews/ListNews";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Archive from './components/Archive/Archive';
-import NewsDetail from './components/ListNews/NewsDetail/NewsDetail';
-import NotFound from './components/NotFound/NotFound';
+import Archive from "./components/Archive/Archive";
+import NewsDetail from "./components/ListNews/NewsDetail/NewsDetail";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
@@ -14,12 +14,12 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<ListNews/>} />
+          <Route path="/" element={<ListNews />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/details/:id" element={<NewsDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </div>
   );

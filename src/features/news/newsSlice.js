@@ -6,7 +6,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   message: "",
-  news:{}
+  news: {},
 };
 
 export const getAll = createAsyncThunk("listNews/getAllNews", async () => {
@@ -17,29 +17,38 @@ export const getAll = createAsyncThunk("listNews/getAllNews", async () => {
   }
 });
 
-export const getAllArchive = createAsyncThunk("listNews/getAllArchive", async () => {
-  try {
-    return await newsService.getAllArchive();
-  } catch (error) {
-    console.error(error);
+export const getAllArchive = createAsyncThunk(
+  "listNews/getAllArchive",
+  async () => {
+    try {
+      return await newsService.getAllArchive();
+    } catch (error) {
+      console.error(error);
+    }
   }
-});
+);
 
-export const archiveNews = createAsyncThunk("listNews/archiveNews", async (id) => {
-  try {
-    return await newsService.archiveNews(id);
-  } catch (error) {
-    console.error(error);
+export const archiveNews = createAsyncThunk(
+  "listNews/archiveNews",
+  async (id) => {
+    try {
+      return await newsService.archiveNews(id);
+    } catch (error) {
+      console.error(error);
+    }
   }
-});
+);
 
-export const removeNews = createAsyncThunk("listNews/removeNews", async (id) => {
-  try {
-    return await newsService.removeNews(id);
-  } catch (error) {
-    console.error(error);
+export const removeNews = createAsyncThunk(
+  "listNews/removeNews",
+  async (id) => {
+    try {
+      return await newsService.removeNews(id);
+    } catch (error) {
+      console.error(error);
+    }
   }
-});
+);
 
 export const publish = createAsyncThunk(
   "news/publish",
@@ -86,12 +95,12 @@ export const newsSlice = createSlice({
       state.listNews = state.listNews.filter(
         (elem) => elem._id !== action.payload.news._id
       );
-    })
+    });
     builder.addCase(removeNews.fulfilled, (state, action) => {
       state.listNews = state.listNews.filter(
         (elem) => elem._id !== action.payload.news._id
       );
-    })
+    });
     builder.addCase(publish.fulfilled, (state, action) => {
       state.isSuccess = true;
       state.listNews = [action.payload.news, ...state.listNews];
@@ -107,7 +116,6 @@ export const newsSlice = createSlice({
     builder.addCase(getById.fulfilled, (state, action) => {
       state.news = action.payload;
     });
-
   },
 });
 
