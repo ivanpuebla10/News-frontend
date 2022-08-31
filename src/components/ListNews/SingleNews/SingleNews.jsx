@@ -20,10 +20,10 @@ const SingleNews = () => {
     {
     fetched ? 
     
-    <img className ="car-image" src={news?.images[0]} key={i} />
+    <img className ="car-image" src={news?.images[0]} key={i}/>
 
     :
-<img className ="car-image" src={"http://localhost:5000/images/" + news?.images[0]} key={i} />
+<img className ="car-image" src={"http://localhost:5000/images/" + news?.images[0]} key={i}/>
     }
         <Carousel.Caption>
         <Link className = "link-class" to={"/details/" + news?._id} >

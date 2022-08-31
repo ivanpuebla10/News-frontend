@@ -50,7 +50,7 @@ const PublishNews = () => {
           setOpen(!open)
       }
       dispatch(reset());
-    }, [isError, isSuccess, message, dispatch]);
+    }, [isError, isSuccess, message, open, dispatch]);
 
   const onSubmit = async (e) => {
 
