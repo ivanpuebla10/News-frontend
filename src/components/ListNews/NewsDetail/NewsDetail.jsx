@@ -15,9 +15,6 @@ const NewsDetail = () => {
         dispatch(getById(id));
     }, []);
 
-    // const image =news?.images?.map((image,i )=> {
-    //     return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>
-    // })
     const fetched = news?.fetched
     const image =news?.images?.map((image,i )=> {
          
@@ -46,13 +43,6 @@ const NewsDetail = () => {
         </Card.Body>
         <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news?.author}</span><span>{newDate? newDate[0] : null}</span></Card.Footer>
       </Card>
-    //     <div>
-    //     <p>{news.title}</p>
-    //     <p>{news.description}</p>
-    //     {image ? image : null}
-    //     <p>{news.content}</p>
-    //     <p>{news.author}</p>
-    //   </div>
     )
   }
   

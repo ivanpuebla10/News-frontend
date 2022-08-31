@@ -1,6 +1,7 @@
 .car-image {
-    opacity: 0.7;
+    /* opacity: 0.7; */
     height: 25rem;
+    width: 100%
 }
 
 .link-class {
