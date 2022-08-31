@@ -1,5 +1,4 @@
 .car-image {
-    /* opacity: 0.7; */
     height: 25rem;
     width: 100%
 }
@@ -7,7 +6,6 @@
 .link-class {
     all:unset; 
     cursor: pointer;
-    /* width: 30% */
 }
 
 .footer {
@@ -42,9 +40,6 @@
 
 @media only screen and (max-width: 769px) {
     .image-container {
-        /* width:10rem;
-    height:10rem;
-    float: right */
     display: none;
     }
     .body-container {
@@ -53,4 +48,11 @@
     .card-class {
         width: 100%;
     }
+  }
+  @media only screen and (max-width: 992px) {
+    .image-container {
+        width:10rem;
+    height:10rem;
+    }
+
   }

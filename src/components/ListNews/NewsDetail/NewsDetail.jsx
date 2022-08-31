@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getById } from "../../../features/news/newsSlice";
 import Carousel from 'react-bootstrap/Carousel';
+import "./NewsDetail.css";
 
 
 const NewsDetail = () => {
@@ -19,9 +20,9 @@ const NewsDetail = () => {
     const image =news?.images?.map((image,i )=> {
          
     if(fetched) { 
-    return <Carousel.Item key={i}><Card.Img src={image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>}
+    return <Carousel.Item key={i}><Card.Img src={image} className="carousel-image"/></Carousel.Item>}
     else{
-      return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} style={{ height: '35rem', width:'70rem'}}/></Carousel.Item>
+      return <Carousel.Item key={i}><Card.Img src={"http://localhost:5000/images/" + image} className="carousel-image"/></Carousel.Item>
     }    
       })
 
@@ -30,18 +31,18 @@ const NewsDetail = () => {
     return (
         <Card className="container">
         <Card.Body>
-            <div style={{textAlign:'left', marginBottom:'2rem'}}>
-        <h2 style={{marginBottom:'1rem'}}>{news?.title}</h2>
+            <div className ="intro-container" >
+        <h2 className="description">{news?.title}</h2>
     <Card.Subtitle className="mb-2 text-muted">{news?.description}</Card.Subtitle>        
         </div>
         <Carousel >
         {image ? image : null}
         </Carousel>
-          <Card.Text style={{textAlign:'justify', padding:'3rem'}}>
+          <Card.Text className="content-container">
             {news?.content}
           </Card.Text>
         </Card.Body>
-        <Card.Footer style={{display:"flex", justifyContent:"space-around"}}><span>Author: {news?.author}</span><span>{newDate? newDate[0] : null}</span></Card.Footer>
+        <Card.Footer className="footer"><span>Author: {news?.author}</span><span>{newDate? newDate[0] : null}</span></Card.Footer>
       </Card>
     )
   }

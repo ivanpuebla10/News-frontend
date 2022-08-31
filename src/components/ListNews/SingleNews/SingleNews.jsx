@@ -55,7 +55,7 @@ const SingleNews = () => {
       <Card.Text className="mb-2 text-muted">
         {news.description} 
         <Link to={"/details/" + news._id} className="link-class">
-          <Card.Subtitle>Read More{'>>'}</Card.Subtitle>
+        <Card.Subtitle style={{margin:'1rem'}}>Read More{'>>'}</Card.Subtitle>
         </Link>
       </Card.Text>
               <Card.Footer className="footer">

@@ -1,0 +1,17 @@
+.link-class {
+    all:unset;
+    cursor: pointer
+}
+
+.footer {
+    display:flex;
+    justify-content:space-around
+}
+
+.archive-card {
+    margin: 4rem
+}
+
+.archive-image {
+    height: 25rem
+}

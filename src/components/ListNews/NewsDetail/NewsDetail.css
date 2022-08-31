@@ -1,0 +1,23 @@
+.intro-container {
+    text-align:left;
+    margin-bottom:2rem
+}
+
+.carousel-image {
+    height: 35rem;
+    width:70rem
+}
+
+.description {
+    margin-bottom:1rem
+}
+
+.content-container {
+    text-align:justify;
+    padding:3rem
+}
+
+.footer {
+    display:flex;
+    justify-content: space-around
+}

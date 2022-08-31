@@ -4,20 +4,11 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { useDispatch, useSelector } from 'react-redux';
 import { publish, reset } from '../../../features/news/newsSlice';
 import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Toast from 'react-bootstrap/Toast';
-import ToastContainer from 'react-bootstrap/ToastContainer'
 import Collapse from 'react-bootstrap/Collapse';
-import Alert from 'react-bootstrap/Alert';
 import Overlay from 'react-bootstrap/Overlay';
 import Popover from 'react-bootstrap/Popover';
 import CloseButton from 'react-bootstrap/CloseButton';
-
-
-
-
-
+import "./PublishNews.css";
 
 //cambiar controlId
 
@@ -65,33 +56,16 @@ const PublishNews = () => {
 
     e.preventDefault();
     const formData = new FormData();
-    // let upload =[]
-    // for (let img of e.target.images.files) {
-    //   upload.push(img)
-    // }
-
-    // // let upload1 = upload.join(",")
-    // console.log(upload)
-    
 
 for (let img of e.target.images.files) {
   formData.append('images', img)
 }
-    // formData.set("images", file);
     formData.set("title", e.target.title.value);
     formData.set("description", e.target.description.value);
     formData.set("content", e.target.content.value);
     formData.set("author", e.target.author.value);
 
     await dispatch(publish(formData));
-    //si deja de funcionar descomentar esto y quitar este codigo del useffect
-    // await setFormData(()=>({
-    // title: '',
-    // description: '',
-    // content: '',
-    // author: '',
-    // }))
-    // setOpen(!open)}
   };
 
   const onChange = async (e) => {
@@ -109,31 +83,9 @@ for (let img of e.target.images.files) {
         aria-controls="example-collapse-text"
         aria-expanded={open}
         style={{ margin: '2rem'}}
-  
       >
         Click to publish
       </Button>
-      {/* <ToastContainer position='top-end'>
-      <Row>
-      <Col xs={6}>
-        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide >
-          <Toast.Header>
-            <strong className="me-auto">{type}</strong>
-          </Toast.Header>
-          <Toast.Body>{desc}</Toast.Body>
-        </Toast>
-      </Col>
-    </Row>
-    </ToastContainer> */}
-
-      {/* <Alert variant="danger" onClose={() => setShow(false)} show={show} dismissible>
-        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-        <p>
-          Change this and that and try again. Duis mollis, est non commodo
-          luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-          Cras mattis consectetur purus sit amet fermentum.
-        </p>
-      </Alert> */}
 
 <Overlay target={target.current} show={show} placement="right" delay={3000} autohide>
 <Popover id="popover-contained">
@@ -146,7 +98,7 @@ for (let img of e.target.images.files) {
       </Overlay>
     <Collapse in={open}>
 
-      <Form onSubmit={onSubmit} style={{ margin: '2rem', border: "1px solid #D3D3D3", borderRadius: "1em", padding: "1em", background: '#F2F4F6' }}>
+      <Form onSubmit={onSubmit} className="publish-form">
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Title</Form.Label>
         <Form.Control type="text" placeholder="Title" onChange={onChange} name="title" value={formData2.title}/>
